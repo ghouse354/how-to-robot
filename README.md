@@ -5,7 +5,7 @@ Some hopefully infomative lessons about programming FRC robots in Java
 ### Java
  - **Basics**
     - [Say Hello](java/basics/Hello.md)
-    - Varied Variables
+    - [Varied Variables](java/basics/Variables.md)
     - Functions!
     - Conditionals
     - Loops
