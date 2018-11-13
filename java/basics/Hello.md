@@ -28,4 +28,6 @@
 
     Woot! You printed some text! Play around with this by changing the text, or even adding more `System.out.println` lines!
 
-    [Back to Main](../../README.md)
+[Next: Varied Variables >>](Variables.md)
+
+[Back to Main](../../README.md)
