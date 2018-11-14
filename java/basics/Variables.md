@@ -8,54 +8,53 @@
 
 **Process**:
 
-Previously, we learned how to write code to print text to the screen. That's good, but everything you want to change something, you'll have to rewrite your code. The code we wrote also wasn't very dynamic or interesting, so now, let's write some code that does stuff that's a little more interesting.
+In the previous lesson, we learned how to output text to the screen using the `System.out.printf()` function. That was fun, but not particularly useful, since everytime you want to changes something, you'll have to rewrite your code. The code we wrote also didn't do very much... So, let's try something a little more exciting and write some code that does some slightly more interesting stuff.
 
-Imagine that we want to write some code that converted seconds into hours, minutes and seconds. On a piece of paper - writing every step - figure out how many hours:minutes:seconds (H:M:S) there are in 3661 seconds.
+Suppose that your friend has given you a pretty crappy stopwatch that only counts in seconds. Really, it's kinda bad. Can you imagine telling someone else "hey! six hundred and fifty seconds have elapsed"? So, your job is to convert the seconds into hours:minutes:seconds (H:M:S).
 
-.
-
-Really, do it by hand, on paper.
+Let's try doing this by hand first. Suppose the stopwatch reads 3723. Write out how you would convert this by hand into H:M:S.
 
 .
 
-Have an answer?
+All good?
 
 .
 
-You should have gotten 1 hour, 1 minute and 1 second. Now, what if I had asked for how many H:M:S there are in 3667?
+You should have gotten 1 hour, 2 minutes and 3 seconds. How about the stopwatch instead reads 4123?
 
-Let's write a generic way to solve this problem, so that we can solve it for any number of seconds.
+Computers are really really good at doing math really really fast, so let's try to write a program that can calculate how many hours, minutes and seconds there are for any given number of seconds.
 
-There are multiple ways to start (and you may have already used one of these methods when doing it by hand) - maybe we can convert the seconds to minutes first, and then convert minutes to hours. Or maybe we convert to hours first and figure out how many minutes are left. There is no right or wrong way to solve this problem, as long as it works.
+To start, let's figure out a generic way to solve this problem. There are multiple ways to start (and you may have already used one of these methods when doing it by hand). We could convert the seconds into minutes, and then convert the minutes into hours. Or, we could convert the hours first and figure out how many minutes are left over. There is no right or wrong way to solve this, as long as it works.
 
-For the sake of this tutorial, let's use the method that converts from seconds to minutes to hours.
+For our example, let's use the method that converts from seconds -> minutes -> hours.
 
-We'll first convert seconds to minutes by dividing the seconds by 60. For 3661 seconds, the division is 61 minutes with 1 second left over.
+First, we'll convert seconds to minutes by dividing by... you guessed it... 60! For 3723, the answer we get is 62 minutes, with 3 seconds left over.
 
-Next, we'll divide the minutes by 60, so that we can get hours. 61 minutes is 1 hour with 1 minute left over.
+Next, we'll divide the minutes that we calculated previously (in this case, 62) by 60 again, so that we can get the hours. 62 minutes is 1 hour, with 2 minutes left over.
 
-At this point, we know that 3661 seconds = 1 hour, 1 minute, 1 second.
+So, we now know that 3723 seconds = 1 hour, 2 minutes, 3 seconds
 
-Let's write the steps in math-ish:
+Cool! What we just worked through is called an *algorithm*, which is a set of steps that a computer (or a human) can take to solve a problem. Now, let's make our *algorithm* a little clearer, and more precise. To do this, we'll write the steps that we took to get our answer in something called *pseudocode*, which kinda looks like English and Math smushed together:
+
 ```
-Starting Seconds = 3661
+Starting Seconds = 3723
 
 Minutes = Starting Seconds / 60 (ignore the remainder)
 
-Seconds = The remainder of (Starting Seconds / 60)
+Seconds = Remainder of (Starting Seconds / 60)
 
 Hours = Minutes / 60 (ignore the remainder)
 
-Minutes = The remainder of (Minutes / 60)
+Minutes = Remainder of (Minutes / 60)
 
-___ [starting seconds] is ___ [Hours] hours, ___ [Minutes] minutes and ___ [Seconds] seconds.
+Output Hours, Minutes, Seconds
 ```
 
 If you're confused, ask for help!
 
-Now that we've broken down how to solve the problem generically, let's try to code it!. Here's some [starter code](https://www.ideone.com/f2g1K6).
+Now that we've broken down how to solve this problem generically, let's try to write some code for it. Here's some [starter code](https://www.ideone.com/f2g1K6).
 
-In the starter code, we see the main function and the main body, like our last example. However, we also see something new:
+In the starter code, we see the main function and main body, like in our previous examples. However, we also see something new!
 
 ``` java
 int seconds;
@@ -66,40 +65,41 @@ int sec;
 seconds = 3661;
 ```
 
-Here, we are declaring **variables**. What are variables? Glad you asked! **Variables** are places in your code where you can store *values* (e.g. numbers). Different types of variables can store different types of things. If we want to store whole numbers (e.g. -2, -1, 0, 1, 2, etc) we will make an `int` or **Integer**. If we want to hold a number that's not a whole number (e.g. 3.14, 0.99, -16.5, etc), we would use a `double`. There are more *types* than just integers and doubles, but we'll cover those later.
+What in the world is that? Well, we're declaring **variables**. What are variables you ask? **Variables** are places in your code where you can store *values* (e.g. numbers, text, etc). Different types of variables can store different types of things. For example, if we want to store whole numbers (e.g. -123, 0, 2, 354), we can use an `int` or **Integer**. If we want to hold a number that's NOT a whole number (e.g. 3.14, -0.99, 1.23), we would use a `double`. There are many more *types* than just integers and doubles, but we'll talk about those later.
 
-In the line `int seconds;`, we are telling the computer that we want a place to put whole numbers (hence the `int` at the beginning), and we are going to call it "seconds". The following lines are creating more *integer* variables with different names.
+Now, on the line that says `int seconds;`, we are telling the computer that we would like a place to store a whole number (hence the `int`), and we would like to call it "seconds". The following lines create more *integer* variables with different names.
 
-In the line `seconds = 3661;`, we are *assigning* a value to `seconds` - In this case, we are assigning the value of 3661. So now, `seconds` equals 3661 until we assign it a new value. When we assign values to variables, we always put the variables on the left side of the equal sign, and the new value on the right side. To quickly demonstrate:
+> In Java, there are basically two parts to a variable. The *type* and the *name*. The *type* tells the computer what kind of values you want to put in the variable, and the *name* tells the computer what you want to refer to the variable as.
 
-``` java
+OK, cool you say. Now we know how to create variables. But what about this line that says `seconds = 3661;`. What does THAT mean? On that line, we are *assigning* a value to the variable named `seconds` - In this case, we are assigning the value of 3661. Now, `seconds` equals 3661 until we assign it a new value. When we assign values to variables, we ALWAYS put the variables on the left side of the equal sign, and the new value on the right. For example:
+
+```java
 int a;
 int b;
 
 a = 4;
-// a is now assigned the value of 4
+// Ooh, a is now 4
+
 b = 6;
-// b is not assigned the value of 6
+// Ooh, b is now 6
+
 a = b;
+// Uhm what's a now?
 ```
 
-We read code from top to bottom, and unlike in algebra, the value of the variable can be changed. What do you think `a` and `b` are at the end of the code? If you thought that `a` and `b` are not equal, or that they both equal 4 - sorry, you didn't get it. But if you thought that `a` and `b` both equaled 6, then good job!
+What do you think the values of `a` and `b` are at the end of this chunk of code? If you guessed that `a` and `b` were both equal to 6, you got it right!
 
-`a` equals 6 because assigning values *always* goes from the right to the left. The variable on the left of the equal sign is the variable changing its value. Given this, if you try to write `6 = a`, the computer will get confused - you cannot reassign the value of 6. 6 is always 6.
+`a` equals 6 because assigning values *always* goes from right to left. The variable on the left side of the equal sign is the variable changing its value. Now, if you try doing this instead `6 = a`, the computer will get incredibly confused, because `6` is not a variable. 6 will always be 6.
 
-Let's play around with some math in code! Open this [math code](https://www.ideone.com/kESOfT) and run it. See what happens! Try changing numbers, can you figure out what is happening?
+Right, now's probably a good time to mess around with some math in code. Open this [math code](https://www.ideone.com/kESOfT) and run it. See what happens! Try changing numbers, can you figure out what is happening?
 
-Try to find three differences (in both the printed lines and the code) between the integers and doubles.
+One thing you may have noticed is that division is a little weird with integers. For example, why does 4 divided by 15 give 0? Why does 15 divided by 4 only give 3? The reason is... we are doing something called *integer math*. This is very much like when you first learned how to do division, where you had things called remainders. (You know, where you divide a number until you're left with something too small to divide by).
 
-One thing you may have noticed is that division behaves weird with integers - Why would 4 divided by 15 return 0? Why is 15 divided by 4 only 3? The reason is because we are doing *integer math*. Integer math is very similar to 3rd grade math class. Remember when you first learned about division, and we had these things called remainders?
+With integer division, we don't care about the remainder; We really only care about the main number before the remainder. For example, with 128 / 5, we only care about the 25, and ignore the remainder of 3. By the same logic, 1 / 10 will be 0 with integer division - the answer is 0, remainder 1.
 
-![IMAGE](https://dj1hlxw0wr920.cloudfront.net/userfiles/wyzfiles/b410fcc6-7a7b-45a0-81b9-354423866db9.gif)
+That's great and all, but what if we don't want to be wasteful, and actually *wanted* the remainder? Never fear! there's a special symbol to represent that! In Java, it's the percent sign (%). We call this operation (getting the remainder) *modulus* or *mod*. So, if I wanted the remainder or 10 / 4, and to store that value in the variable `c`, I would write `c = 10 % 4`, or say "c equals 10 mod 4". What could `c` equal to? If you whispered 2, you're right!
 
-With integer division, we don't care about the remainder, we only care about the number before the remainder. So, with 128 / 5, we only care about the 25, and throw out/ignore the remainder 3. By the same logic, 1 / 10 will be 0 with integer division - The answer is 0 remainder 1.
-
-But what if we *wanted* the remainder? That's where the percent sign (%) comes in. We call this operation *modulus* or *mod*. If I wanted the remainder of 10 / 4, I would write `c = 10 % 4` or say "c equals 10 mod 4". After that line of code, what would `c` equal? That's right, it would equal 2.
-
-To make sure we're good on this, write down the answers to the following equations (following integer math rules):
+Let's make sure that we really understand this. Here are some equations. Write down the answers to each of them, following integer math rules:
 - 1 / 10
 - 5 % 3
 - 2 / 3 + 4 / 3
@@ -107,46 +107,42 @@ To make sure we're good on this, write down the answers to the following equatio
 
 .
 
-Did you write them down?
+All good?
 
 .
 
-Really?
+- 1 / 10 = 0, because as we explained before, we get 0 with a remainder of 1, but we're not interested in the remainder in this case
+- 5 % 3 = 2, since 3 goes into 5 once, and leaves a remainder of 2
+- 2 / 3 + 4 / 3 = 1, In this case, 2 / 3 = 0 (integer math) and 4 / 3 = 1 (integer math)
+- (7 % 4) / 2 = 1, 7 % 4 = 3, and 3 / 2 = 1
 
-.
-
-Fine.
-
-.
-
-- 1 / 10 = 0, because 10 goes into 1 no times (0). Integer division, we don't care about the remainder here
-- 5 % 3 = 2. Here we only care about the remainder. 3 goes into 5 one time with a remainder of 2.
-- 2 / 3 + 4 / 3 = 1 - Integer division! 2 / 3 = 0, and 4 / 3 = 1!
-- (7 % 4) / 2 = 1 - This was more about combining concepts. 7 % 4 = 3, and 3 / 2 = 1
-
-So, looking back at our math-ish, how can we convert it to code?
+Now, looking back at our pseudocode, how can we convert it into real code?
 ```
 1 | Starting Seconds = 3661
 2 | Minutes = Starting Seconds / 60 (ignore the remainder)
 3 | Seconds = The remainder of (Starting Seconds / 60)
 4 | Hours = Minutes / 60 (ignore the remainder)
 5 | Minutes = The remainder of (Minutes / 60)
-6 | ___ [starting seconds] is ___ [Hours] hours, ___ [Minutes] minutes, and ___ [Seconds] seconds
+6 | Output [Hours], [Minutes], [Seconds]
 ```
-We have line numbers there to make the math-ish "code" easier to refer to.
 
-In the starter code, we already have line 1 and line 6 written (woohoo, free stuff!). Line 1 is written as `seconds = 3661;`. We're using the variable `seconds` to hold the Starting Seconds. Line 6 is written using the `System.out.printf` function. We'll put our answers in the variables `hours`, `min` and `sec`, and the `System.out.printf` line will print out their values. So, we only need to write lines 2 to 5.
+We have line numbers here just to make it easier to refer to.
 
-The first thing we should do is the substitute our math-ish names for the variable names:
+There are some lines in our pseudocode that are already in our starter code. Can you spot them? Line 1 and line 6 of our pseudo code have already been written (woot free stuff!). Line 1 is written as `seconds = 3661;`. In this case, we're using the variable that we've named `seconds` to hold the Starting Seconds. Line 6 is written using the `System.out.printf` function. So, what we need to do next is to put our answers in the variables `hours`, `min` and `sec`, and the `printf` line will do the rest.
+
+To start, let's substitute our pseudocode names for the actual variable names that we'll use:
 ```
-min = seconds / 60 (ignroe the remainder)
-sec = The remainder of (seconds / 60)
-hour = min / 60 (ignore the remainder)
-min = The remainder of (min / 60)
+1 | seconds = 3661
+2 | min = seconds / 60 (ignore the remainder)
+3 | sec = The remainder of (seconds / 60)
+4 | hours = min / 60 (ignore the remainder)
+5 | min = The remainder of (min / 60)
+6 | Output [hours], [min], [sec]
 ```
-Now we need to get rid of all those words! English is great and all, but the computer won't understand us. Looking at our math code from earlier, how do we do division that ignores the remainder? How do we get the remainder?
 
-Update the [starter code](https://www.ideone.com/f2g1K6) with your converted math-ish and click the green button. Did it work? If it didn't, ask for help!
+This is looking better, but now we need to get rid of all of those pesky words. English is great and all, but the computer won't understand us well. Looking at our math code from earlier, how can we do division that ignores the remainder? How do we get the remainder?
+
+Update the [starter code](https://www.ideone.com/f2g1K6) with your converted pseudocode and click the green button. Did it work? If it didn't, ask for help!
 
 Once you have it working, change the value of `seconds` and see if it still gives the correct answer!
 

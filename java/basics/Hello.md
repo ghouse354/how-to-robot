@@ -16,17 +16,17 @@
 
 2. Inside the **main body**, we're going to write the following line:
 
-    ``` System.out.println(); ```
+    ``` System.out.printf(); ```
 
-    Inside the `println` parantheses, write something that you want printed to the screen. Traditionally, we will write something like "Hello World". Make sure that whatever you want printed is surrounded by "double quotes". As an example, if I want to write "arr I'm a pirate", my code would look like:
+    Inside the `printf` parantheses, write something that you want printed to the screen. Traditionally, we will write something like "Hello World". Make sure that whatever you want printed is surrounded by "double quotes". As an example, if I want to write "arr I'm a pirate", my code would look like:
 
-    ``` System.out.println("arr I'm a pirate"); ```
+    ``` System.out.printf("arr I'm a pirate"); ```
 
 3. Now that we have written our first code, let's see if it works! On the bottom write, there is a green button labeled "run". Click it!
 
-    If everything went well, the box beneath the code will show the text you entered. If it didn't go well, you'll see some error messages under the label "compilation info". Make sure that you included a semicolon ";" at the end of your statement, and that you spelled and capitalized `System.out.println` correctly! Also make sure that you used double quotes ("") inside the parenthesis. If you had errors, click "edit" and fix them, then click the green button again.
+    If everything went well, the box beneath the code will show the text you entered. If it didn't go well, you'll see some error messages under the label "compilation info". Make sure that you included a semicolon ";" at the end of your statement, and that you spelled and capitalized `System.out.printf` correctly! Also make sure that you used double quotes ("") inside the parenthesis. If you had errors, click "edit" and fix them, then click the green button again.
 
-    Woot! You printed some text! Play around with this by changing the text, or even adding more `System.out.println` lines!
+    Woot! You printed some text! Play around with this by changing the text, or even adding more `System.out.printf` lines!
 
 [Next: Varied Variables >>](Variables.md)
 
